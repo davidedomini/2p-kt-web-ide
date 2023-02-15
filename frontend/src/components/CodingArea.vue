@@ -6,12 +6,20 @@
 export default {
     data() {
         return {
-            code: ""
+            code: "",
+            result:"Query result:",
+            query:""
         };
     },
     methods: {
-        printCode() {
+        solve() {
             console.log(this.code)
+        },
+        solveAll() {
+            console.log(this.query)
+        },
+        reset() {
+            
         }
     }
 }
@@ -21,21 +29,23 @@ export default {
 
 <template>
     
-    <VueCodemirror
+    <div class='code-container'>
+        <VueCodemirror
         :style="{ height: '500px', width:'750px' }"
         v-model="code"
-    />
+        />
+        <textarea class="result" readonly> {{ result }} </textarea>
+    </div>
+    
+    <textarea class="query-area" v-model="query" placeholder="Insert the query here..." cols="91" />
+    
+    <div>
+        <Button label="Solve" class="p-button-custom" @click="solve()" />
+        <Button label="Solve All"  class="p-button-custom" @click="solveAll()" /> 
+        <Button label="Reset" class="p-button-custom" @click="reset()" /> 
+    </div>
 
-    <Button label="Solve" style="height: 35px; width: 100px;" class="p-button-custom" @click="printCode()" />
-    <Button label="Solve All" style="height: 35px; width: 100px;" class="p-button-raised p-button-custom" @click="printCode()" /> 
-    <Button label="Reset" style="height: 35px; width: 100px;" class="p-button-raised p-button-custom" @click="printCode()" /> 
+    
 </template>
 
 
-<style scoped>
-.p-button-custom {
-    margin-top:10px;
-    margin-left:10px;
-    border-radius: 50px;
-}
-</style>
