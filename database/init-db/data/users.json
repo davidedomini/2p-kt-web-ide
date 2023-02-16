@@ -1,0 +1,17 @@
+[{
+    "_id": {
+      "$oid": "62f1460ecab5eb0861361c4d"
+    },
+    "email": "davidedomini@gmail.com",
+    "name": "Davide",
+    "surname": "Domini",
+    "username": "davidedomini"
+  },{
+    "_id": {
+      "$oid": "62f1471bcab5eb0861361c50"
+    },
+    "email": "simonemontanari@gmail.com",
+    "name": "Simone",
+    "surname": "Montanari",
+    "username": "simonemontanari"
+  }]
