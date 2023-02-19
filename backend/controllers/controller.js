@@ -13,7 +13,10 @@ exports.signup = (req, res) => {
 }
 
 exports.signin = (req, res) => {
-
+    res.header('Access-Control-Allow-Origin', '*');
+    let user = req.body.user;
+    console.log(`Username: ${user.username}`);
+    console.log(`Password: ${user.password}`);
 }
 
 exports.authorization = (token, id) => {
