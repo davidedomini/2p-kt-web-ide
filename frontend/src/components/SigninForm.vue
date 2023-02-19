@@ -32,6 +32,9 @@ export default {
     <div class="container">
         <form class="signin-form" @submit.prevent="login">
             <h1>Login</h1>
+            <div class="p-signup">
+                Don't have an account? <router-link to="/signup">Create today!</router-link>
+            </div>
             <div class="p-field">
             <label for="username">Username</label>
             <InputText id="username" v-model="form.username" />
@@ -65,6 +68,11 @@ background-color: #f5f5f5;
 }
 
 h1 {
+text-align: center;
+margin-bottom: 20px;
+}
+
+.p-signup {
 text-align: center;
 margin-bottom: 20px;
 }

@@ -10,6 +10,11 @@ const router = createRouter({
       name: 'signin',
       component: SigninView
     },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: SignupView
+    },
   ]
 })
 
