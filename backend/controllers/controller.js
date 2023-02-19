@@ -35,8 +35,30 @@ exports.signin = (req, res) => {
     let user = req.body.user;
     console.log(`Username: ${user.username}`);
     console.log(`Password: ${user.password}`);
+    User
+        .findOne()
+        .where('username').equals(user.username)
+        .exec((err, usr) => {
+            if(usr != null && !err){
+                if(bcrypt.compareSync(user.password, usr.password)){
+                    let tkn = jsonwebtoken.sign({ username: usr.username, id: usr._id }, SECRET_KEY, { algorithm: 'HS512', expiresIn: '7d' });
+                    res.json({ result: 'ok', token: tkn});
+                } else{
+                    res.json({ message: 'Error! The specified user does not exist'}); 
+                }
+            }
+        });
 }
 
 exports.authorization = (token, id) => {
-
+    let valid;
+    if(token == null) valid = { isValid: false };
+    try {
+        const decoded = jsonwebtoken.verify(token, SECRET_KEY);
+        if(decoded.id == id) valid = { isValid: true }
+        else valid = { isValid: false }
+    }catch(ex){
+        valid = { isValid: false };
+    }
+    return valid;
 }
