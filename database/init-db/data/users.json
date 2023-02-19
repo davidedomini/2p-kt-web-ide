@@ -6,8 +6,8 @@
     "surname": "Domini",
     "email": "davidedomini@gmail.com",
     "username": "dom99",
-    "password": "$2b$10$ancSko2W8FRBmAtgRQQhUOj8GKfdEKAWUi7mQyIHe/qLImWjIvoMm",
-    "salt": "$2b$10$ancSko2W8FRBmAtgRQQhUO"
+    "password": "$2b$10$ZX20j6ogxpDBhiH1dE4eV.0tCzWNc2eCo1KCyKlRf5fIZ9CQcodCa",
+    "salt": "$2b$10$ZX20j6ogxpDBhiH1dE4eV"
   },
   {
     "_id": {
@@ -17,6 +17,6 @@
     "surname": "Montanari",
     "email": "simonemontanari@gmail.com",
     "username": "simonemontanari",
-    "password": "$2b$10$1yxwNLdxkaG2OBZD8VcHZeNxypUEdwrCfeXWazFAbTbTOJnzSssYO",
-    "salt": "$2b$10$1yxwNLdxkaG2OBZD8VcHZe"
+    "password": "$2b$10$un5r.nDVgsCmqL.2KTVjKehzkazMovwgcAFiXmi.0t19SEXq2oaNK",
+    "salt": "$2b$10$un5r.nDVgsCmqL.2KTVjKe"
   }]
