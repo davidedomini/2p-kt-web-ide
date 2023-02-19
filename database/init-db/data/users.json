@@ -2,16 +2,21 @@
     "_id": {
       "$oid": "62f1460ecab5eb0861361c4d"
     },
-    "email": "davidedomini@gmail.com",
     "name": "Davide",
     "surname": "Domini",
-    "username": "davidedomini"
-  },{
+    "email": "davidedomini@gmail.com",
+    "username": "dom99",
+    "password": "$2b$10$ancSko2W8FRBmAtgRQQhUOj8GKfdEKAWUi7mQyIHe/qLImWjIvoMm",
+    "salt": "$2b$10$ancSko2W8FRBmAtgRQQhUO"
+  },
+  {
     "_id": {
       "$oid": "62f1471bcab5eb0861361c50"
     },
-    "email": "simonemontanari@gmail.com",
     "name": "Simone",
     "surname": "Montanari",
-    "username": "simonemontanari"
+    "email": "simonemontanari@gmail.com",
+    "username": "simonemontanari",
+    "password": "$2b$10$1yxwNLdxkaG2OBZD8VcHZeNxypUEdwrCfeXWazFAbTbTOJnzSssYO",
+    "salt": "$2b$10$1yxwNLdxkaG2OBZD8VcHZe"
   }]

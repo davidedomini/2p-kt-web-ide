@@ -4,7 +4,7 @@ services:
     container_name: mongodb
     image: mongo:latest
     volumes:
-      - ./init-mongodb:/docker-entrypoint-initdb.d
-      - ./init-mongodb/data:/tmp/data
+      - ./init-db:/docker-entrypoint-initdb.d
+      - ./init-db/data:/tmp/data
     ports:
       - '27018:27017'

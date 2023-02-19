@@ -9,7 +9,7 @@ global.appRoot = path.resolve(__dirname)
 
 var PORT = 3000
 
-//mongoose.connect('mongodb://localhost:27018/2pktweb')
+mongoose.connect('mongodb://localhost:27018/2pktweb')
 
 routes(app)
 
