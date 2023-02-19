@@ -1,4 +1,4 @@
-# 2p-kt-web-ide
+# 2p-kt-web
 
 A web-based IDE for the kotlin version of tuProlog [2p-kt](https://github.com/tuProlog/2p-kt)
 
