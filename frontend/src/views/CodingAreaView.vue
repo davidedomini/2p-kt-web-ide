@@ -5,15 +5,9 @@ import Menu from '../components/Menu.vue'
 
 <template>
     <main>
-        <nav>
+        <nav class="custom-menu">
             <Menu />
         </nav>
         <CodingArea />
     </main>
 </template>
-
-<style>
-nav{
-    border-bottom: 100px !important; /*TODO non funziona*/
-}
-</style>
