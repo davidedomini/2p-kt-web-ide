@@ -44,7 +44,7 @@ exports.signin = (req, res) => {
                     let tkn = jsonwebtoken.sign({ username: usr.username, id: usr._id }, SECRET_KEY, { algorithm: 'HS512', expiresIn: '7d' });
                     res.json({ result: 'ok', token: tkn});
                 } else{
-                    res.json({ message: 'Error! The specified user does not exist'}); 
+                    res.json({ message: 'Error! wrong password'}); 
                 }
             }
         });
