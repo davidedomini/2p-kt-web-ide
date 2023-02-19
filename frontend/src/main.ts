@@ -3,12 +3,15 @@ import App from './App.vue'
 import router from './router'
 import { basicSetup } from 'codemirror'
 import VueCodemirror from 'vue-codemirror'
-import Button from 'primevue/button'
+import PrimeVue from 'primevue/config';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
+import InputText from "primevue/inputtext";
+import Password from "primevue/password";
+import Button from 'primevue/button'
 import Menubar from 'primevue/menubar';
 import './assets/main.css'
-import PrimeVue from 'primevue/config';
+
 
 const app = createApp(App);
 app.use(PrimeVue);
@@ -26,5 +29,7 @@ app.use(VueCodemirror, {
 
 app.component('Button', Button)
 app.component('Menubar', Menubar)
+app.component('InputText', InputText);
+app.component('PasswordComp', Password);
 
 app.mount('#app');
