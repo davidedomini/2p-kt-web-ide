@@ -42,9 +42,9 @@ exports.signin = (req, res) => {
             if(usr != null && !err){
                 if(bcrypt.compareSync(user.password, usr.password)){
                     let tkn = jsonwebtoken.sign({ username: usr.username, id: usr._id }, SECRET_KEY, { algorithm: 'HS512', expiresIn: '7d' });
-                    res.json({ result: 'ok', token: tkn});
+                    res.json({ result: 'ok', token: tkn });
                 } else{
-                    res.json({ message: 'Error! wrong password'}); 
+                    res.json({ result: 'Error! wrong password'}); 
                 }
             }
         });

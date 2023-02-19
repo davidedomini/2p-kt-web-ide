@@ -1,9 +1,12 @@
-<script setup></script>
+<script setup>
+import router from "@/router";
+</script>
 
 <script>
 export default {
     data() {
         return {
+            messages: [],
             form: {
                 name: '',
                 surname: '',
@@ -15,13 +18,22 @@ export default {
     },
     methods:{
         login(){
+            this.messages = []
             axios
                 .post('http://localhost:3000/api/signin', {
                     user: {
                         username: this.form.username,
                         password: this.form.password,
                     }
-                }).then(res => console.log(res));
+                }).then(res => {
+                    let response = res.data
+                    if(response.result.includes('Error')){
+                        this.messages.push({severity: 'error', content: 'Login error! Please retry'})
+                    } else{
+                        localStorage.token = response.token
+                        router.push({path: '/code'})
+                    }
+                });
         }
     }
 }
@@ -45,6 +57,9 @@ export default {
             </div>
             <div class="p-field">
             <Button type="submit" label="Login" />
+            </div>
+            <div>
+                <Message v-for="msg of messages" :severity="msg.severity">{{msg.content}}</Message>
             </div>
         </form>
     </div>  
