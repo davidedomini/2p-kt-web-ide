@@ -30,14 +30,12 @@ export default {
 <template>
     
     <div class='code-container'>
-        <VueCodemirror
-        :style="{ height: '500px', width:'750px' }"
-        v-model="code"
-        />
+        <VueCodemirror v-model="code" />
         <textarea class="result" readonly> {{ result }} </textarea>
+        <textarea class="query-area" v-model="query" placeholder="Insert the query here..." cols="91" />
     </div>
     
-    <textarea class="query-area" v-model="query" placeholder="Insert the query here..." cols="91" />
+    
     
     <div>
         <Button label="Solve" class="p-button-custom" @click="solve()" />

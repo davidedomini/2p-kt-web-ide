@@ -24,7 +24,9 @@
 
 .cm-editor{
   margin-left: 1%;
-  border: 1px solid black;  
+  border: 1px solid black;
+  flex-basis: 50%;
+  height: 500px;
 }
 
 .p-button-custom {
@@ -37,23 +39,60 @@
 
 .code-container{
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .result{
   margin-left: auto;
   margin-right: 1%;
   border: 1px solid black;
-  width:37%;
+  flex-basis: 42%
 }
 
 .query-area{
   margin-top: 10px;
   margin-left: 1%;
+  flex-basis: 48%;
 }
 
 @media (hover: hover) {
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);
   }
+}
+
+@media (max-width: 1000px) {
+  
+  .code-container{
+   display: flex;
+   flex-direction: column;
+  }
+
+  .cm-editor{
+    margin-left: 1%;
+    width: 98%;
+    height: 400px;
+    border: 1px solid black; 
+    order: 1;
+  }
+
+  .result{
+    margin-left: 1%;
+    width: 98%;
+    border: 1px solid black;
+    order: 3;
+    margin-top: 10px;
+  }
+
+  .query-area{
+    margin-top: 10px;
+    margin-left: 1%;
+    width: 98%;
+    order: 2; 
+  }
+
+  .v-codemirror {
+    display: unset !important;
+  }
+
 }
