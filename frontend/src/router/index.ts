@@ -6,18 +6,18 @@ import CodeArea from '../views/CodingAreaView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
+    /*{
       path: '/',
       name: 'signin',
       component: SigninView
-    },
+    },*/
     {
       path: '/signup',
       name: 'signup',
       component: SignupView
     },
     {
-      path: '/code',
+      path: '/',
       name: 'code',
       component: CodeArea
     },
