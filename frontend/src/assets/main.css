@@ -52,7 +52,7 @@
 .query-area{
   margin-top: 10px;
   margin-left: 1%;
-  flex-basis: 48%;
+  flex-basis: 50%;
 }
 
 @media (hover: hover) {
