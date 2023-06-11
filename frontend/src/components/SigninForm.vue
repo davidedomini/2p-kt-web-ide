@@ -29,7 +29,8 @@ export default {
                     let response = res.data
                     if(response.result.includes('Error')){
                         this.messages.push({severity: 'error', content: 'Login error! Please retry'})
-                    } else{
+                    } else {
+                        localStorage.username = response.username
                         localStorage.token = response.token
                         router.push({path: '/code'})
                     }
