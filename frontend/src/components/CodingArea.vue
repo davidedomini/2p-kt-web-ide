@@ -8,7 +8,9 @@ export default {
         return {
             code: "",
             result:"Query result:",
-            query:""
+            query:"",
+            timeout: 50,
+            maxSol: 10,
         };
     },
     methods: {
@@ -19,6 +21,15 @@ export default {
         solveAll() {
             console.log(this.query)
             this.result += "\n SolveAll Pressed"
+            axios
+                .post('http://localhost:3000/api/solveAll', {
+                    request: {
+                        theory: this.code,
+                        query: this.query,
+                        timeout: this.timeout,
+                        maxSol: this.maxSol
+                    }
+                });
         },
         reset() {
             this.result = "Query result:"
@@ -34,6 +45,17 @@ export default {
         <VueCodemirror v-model="code" />
         <textarea class="result" rows="7" readonly> {{ result }} </textarea>
         <textarea class="query-area" rows="3" v-model="query" placeholder="Insert the query here..." />
+    </div>
+
+    <div class="slider-container">
+        <div>
+            <label for="timeout" id="timeout">Timeout (ms): {{timeout}} </label>
+            <input id="timeout" type="range" min="1" max="100" v-model="timeout">
+        </div>
+        <div>
+            <label for="maxSol" id="timeout">Max solutions: {{maxSol}} </label>
+            <input id="maxSol" type="range" min="1" max="100" v-model="maxSol">
+        </div>
     </div>
     
     <div class="buttons-container">

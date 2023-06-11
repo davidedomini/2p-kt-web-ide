@@ -11,6 +11,7 @@ import Password from "primevue/password";
 import Button from 'primevue/button'
 import Menubar from 'primevue/menubar';
 import Message from 'primevue/message';
+import Slider from 'primevue/slider';
 import './assets/main.css'
 
 
@@ -33,5 +34,6 @@ app.component('Menubar', Menubar)
 app.component('InputText', InputText);
 app.component('PasswordComp', Password);
 app.component('Message', Message);
+app.component('Slider', Slider);
 
 app.mount('#app');
