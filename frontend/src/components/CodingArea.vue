@@ -14,9 +14,19 @@ export default {
         };
     },
     methods: {
-        solve() {
+        solveNext() {
             console.log(this.code)
             this.result += "\n Solve Pressed"
+            axios
+                .post('http://localhost:3000/api/solveNext', {
+                    request: {
+                        username: localStorage.getItem('username'),
+                        theory: this.code,
+                        query: this.query,
+                        timeout: this.timeout,
+                        maxSol: this.maxSol
+                    }
+                });
         },
         solveAll() {
             console.log(this.query)
@@ -58,7 +68,7 @@ export default {
     </div>
     
     <div class="buttons-container">
-        <Button label="Solve" class="p-button-custom" @click="solve()" />
+        <Button label="Solve Next" class="p-button-custom" @click="solveNext()" />
         <Button label="Solve All"  class="p-button-custom" @click="solveAll()" /> 
         <Button label="Reset" class="p-button-custom" @click="reset()" /> 
     </div>
