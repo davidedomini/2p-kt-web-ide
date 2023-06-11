@@ -7,16 +7,16 @@ export default {
         return {
             items: [
                 {
-                    label:'File',
-                    icon:'pi pi-fw pi-file'
-                }, 
-                {
                     label:'Account',
                     icon:'pi pi-fw pi-user'
                 },
                 {
                     label:'Logout',
-                    icon:'pi pi-fw pi-sign-out'
+                    icon:'pi pi-fw pi-sign-out',
+                    command: () => {
+                        localStorage.removeItem('token');
+                        router.push({path: '/login'});
+                    }
                 }
             ]
         };
