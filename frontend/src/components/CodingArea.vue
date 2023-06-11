@@ -24,6 +24,7 @@ export default {
             axios
                 .post('http://localhost:3000/api/solveAll', {
                     request: {
+                        username: localStorage.getItem('username'),
                         theory: this.code,
                         query: this.query,
                         timeout: this.timeout,
@@ -36,9 +37,7 @@ export default {
         }
     }
 }
-
 </script>
-
 
 <template>
     <div class='code-container'>
@@ -64,5 +63,3 @@ export default {
         <Button label="Reset" class="p-button-custom" @click="reset()" /> 
     </div>
 </template>
-
-
