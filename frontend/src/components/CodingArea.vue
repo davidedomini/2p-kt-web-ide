@@ -21,6 +21,7 @@ export default {
                 .post('http://localhost:3000/api/solveNext', {
                     request: {
                         username: localStorage.getItem('username'),
+                        token: localStorage.getItem('token'),
                         theory: this.code,
                         query: this.query,
                         timeout: this.timeout,
@@ -35,6 +36,7 @@ export default {
                 .post('http://localhost:3000/api/solveAll', {
                     request: {
                         username: localStorage.getItem('username'),
+                        token: localStorage.getItem('token'),
                         theory: this.code,
                         query: this.query,
                         timeout: this.timeout,
