@@ -20,7 +20,7 @@ exports.solveAll = (req, res) => {
         axios
             .post('http://localhost:8080/solveAll', requestData)
             .then(response => {
-                console.log(response.data)
+                console.log("[BACKEND] Solve all done")
                 sockets.get(solveRequest.username).emit('solve-response', response.data)
             });
         
@@ -45,7 +45,7 @@ exports.solveNext = (req, res) => {
         axios
             .post('http://localhost:8080/solveNext', requestData)
             .then(response => {
-                console.log(response.data)
+                console.log("[BACKEND] Solve next done")
                 sockets.get(solveRequest.username).emit('solve-response', response.data)
             });
     //}else{
@@ -53,7 +53,30 @@ exports.solveNext = (req, res) => {
     //}
 }
 
-exports.reset = (req, res) => {}
+exports.reset = (req, res) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    let solveRequest = req.body.request;
+    //if(authorization(solveRequest.token, solveRequest.id).isValid){
+        const generatedId = solveRequest.token;
+        let requestData = {
+            id: generatedId,
+            theory: solveRequest.theory,
+            goal: solveRequest.query,
+            timeout: solveRequest.timeout,
+            maxSol: solveRequest.maxSol,
+            type: "RESET"
+        }
+        axios
+            .post('http://localhost:8080/reset', requestData)
+            .then(response => {
+                console.log("[BACKEND] Reset done")
+            });
+    //}else{
+      //console.log("error");
+    //}
+
+
+}
 
 exports.signup = (req, res) => {
     res.header('Access-Control-Allow-Origin', '*');
