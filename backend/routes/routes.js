@@ -3,10 +3,6 @@ module.exports = (app) => {
     const bodyParser = require('body-parser');
     const jsonParser = bodyParser.json();
 
-    app.
-        route('/api/recentTheories')
-        .get(controller.recentTheories)
-
     app
         .route('/api/signup')
         .post(jsonParser, controller.signup)
@@ -14,4 +10,12 @@ module.exports = (app) => {
     app 
         .route('/api/signin')
         .post(jsonParser, controller.signin)
+
+    app
+        .route('/api/solveAll')
+        .post(jsonParser, controller.solveAll)
+
+    app
+        .route('/api/solveNext')
+        .post(jsonParser, controller.solveNext)
 }

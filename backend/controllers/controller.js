@@ -3,8 +3,12 @@ const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
 const SECRET_KEY = 'E79FB19FDC927E709F250F01CAFED631971E3ECD';
 
-exports.recentTheories = (req, res) => {
-    console.log('Recent theories controller')
+exports.solveAll = (req, res) => {
+    console.log('solve all controller')
+}
+
+exports.solveNext = (req, res) => {
+    console.log('solve all controller')
 }
 
 exports.signup = (req, res) => {
@@ -42,7 +46,7 @@ exports.signin = (req, res) => {
             if(usr != null && !err){
                 if(bcrypt.compareSync(user.password, usr.password)){
                     let tkn = jsonwebtoken.sign({ username: usr.username, id: usr._id }, SECRET_KEY, { algorithm: 'HS512', expiresIn: '7d' });
-                    res.json({ result: 'ok', token: tkn, username: usr.username});
+                    res.json({ result: 'ok', token: tkn, username: usr.username });
                 } else{
                     res.json({ result: 'Error! wrong password'}); 
                 }
