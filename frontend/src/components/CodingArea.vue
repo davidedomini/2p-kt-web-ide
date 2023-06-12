@@ -5,10 +5,7 @@
 
 export default {
     mounted(){
-        localStorage.username = "dom"
-        localStorage.id = "domID"
         let socket = io('http://localhost:3000')
-        console.log("localStorage.getItem('username')")
         socket.emit('connect-client', localStorage.getItem('username'))
         socket.on('solve-response', (data) => {
             this.result += "\n" + data
