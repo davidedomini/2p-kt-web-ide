@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const path = require('path')
 const routes = require('./routes/routes.js')
+const mqservice = require('./services/MQservice.js')
 const cors = require('cors')
 const mongoose = require('mongoose')
 
@@ -23,4 +24,5 @@ app.use((req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
+    mqservice.connectToChannel()
 });
