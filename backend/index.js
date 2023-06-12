@@ -10,7 +10,7 @@ global.appRoot = path.resolve(__dirname)
 
 var PORT = 3000
 
-mongoose.connect('mongodb://localhost:27018/2pktweb')
+//mongoose.connect('mongodb://localhost:27018/2pktweb')
 
 routes(app)
 
@@ -24,5 +24,4 @@ app.use((req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
-    mqservice.connectToChannel()
 });

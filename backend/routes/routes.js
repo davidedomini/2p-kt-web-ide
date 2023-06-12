@@ -18,4 +18,5 @@ module.exports = (app) => {
     app
         .route('/api/solveNext')
         .post(jsonParser, controller.solveNext)
+
 }
