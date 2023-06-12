@@ -1,13 +1,35 @@
 const User = require("../models/user.js");
 const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
+const mqservice = require('../services/MQservice.js')
 const SECRET_KEY = 'E79FB19FDC927E709F250F01CAFED631971E3ECD';
 
 exports.solveAll = (req, res) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    let solveRequest = req.body.request;
+
+    if(authorization(solveRequest.token, solveRequest.id).isValid){
+        let id = "-1" //TODO - serve davvero settarlo con un senso?
+        let message = buildMessage(id, solveRequest, "ALL");
+        mqservice.publishToQueue('requests', message);
+    }else{
+        console.log("error");
+    }    
     console.log('solve all controller')
 }
 
 exports.solveNext = (req, res) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    let solveRequest = req.body.request;
+    if(authorization(solveRequest.token, solveRequest.id).isValid){
+        const salt = bcrypt.genSaltSync(10);
+        const toHash = solveRequest.token + solveRequest.theory + solveRequest.query;
+        const id = bcrypt.hashSync(toHash, salt);
+        let message = buildMessage(id, solveRequest, "NEXT");
+        mqservice.publishToQueue('requests', message);
+    }else{
+        console.log("error");
+    }
     console.log('solve all controller')
 }
 
@@ -54,7 +76,7 @@ exports.signin = (req, res) => {
         });
 }
 
-exports.authorization = (token, id) => {
+const authorization = (token, id) => {
     let valid;
     if(token == null) valid = { isValid: false };
     try {
@@ -65,4 +87,17 @@ exports.authorization = (token, id) => {
         valid = { isValid: false };
     }
     return valid;
+}
+
+const buildMessage = (id, solveRequest, type) => {
+    return `
+    {
+        "id": ${id},
+        "theory": ${solveRequest.theory},
+        "goal": ${solveRequest.query},
+        "timeout": ${solveRequest.timeout},
+        "maxSol": ${solveRequest.maxSol},
+        "type": ${type}
+    }
+    `
 }
