@@ -31,6 +31,7 @@ export default {
                         this.messages.push({severity: 'error', content: 'Login error! Please retry'})
                     } else {
                         localStorage.username = response.username
+                        localStorage.userid = response.id
                         localStorage.token = response.token
                         router.push({path: '/code'})
                     }

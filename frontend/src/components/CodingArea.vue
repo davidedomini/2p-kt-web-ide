@@ -22,6 +22,7 @@ export default {
                     request: {
                         username: localStorage.getItem('username'),
                         token: localStorage.getItem('token'),
+                        id: localStorage.getItem('userid'),
                         theory: this.code,
                         query: this.query,
                         timeout: this.timeout,
@@ -37,6 +38,7 @@ export default {
                     request: {
                         username: localStorage.getItem('username'),
                         token: localStorage.getItem('token'),
+                        id: localStorage.getItem('userid'),
                         theory: this.code,
                         query: this.query,
                         timeout: this.timeout,
