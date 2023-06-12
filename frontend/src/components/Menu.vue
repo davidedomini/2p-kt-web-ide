@@ -7,10 +7,6 @@ export default {
         return {
             items: [
                 {
-                    label:'Account',
-                    icon:'pi pi-fw pi-user'
-                },
-                {
                     label:'Logout',
                     icon:'pi pi-fw pi-sign-out',
                     command: () => {
