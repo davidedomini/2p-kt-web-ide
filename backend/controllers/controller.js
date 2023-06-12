@@ -2,13 +2,13 @@ const User = require("../models/user.js");
 const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
 const axios = require('axios');
+const sockets = require('../utils/sockets').sockets
 const SECRET_KEY = 'E79FB19FDC927E709F250F01CAFED631971E3ECD';
 
 exports.solveAll = (req, res) => {
     res.header('Access-Control-Allow-Origin', '*');
     let solveRequest = req.body.request;
     //if(authorization(solveRequest.token, solveRequest.id).isValid){
-        console.log("[SOLVEALL-CONTROLLER]" + message);
         let requestData = {
             id: -1,
             theory: solveRequest.theory,
@@ -21,6 +21,7 @@ exports.solveAll = (req, res) => {
             .post('http://localhost:8080/solveAll', requestData)
             .then(response => {
                 console.log(response.data)
+                sockets.get(solveRequest.username).emit('solve-response', response.data)
             });
         
     //}else{
@@ -32,8 +33,6 @@ exports.solveNext = (req, res) => {
     res.header('Access-Control-Allow-Origin', '*');
     let solveRequest = req.body.request;
     //if(authorization(solveRequest.token, solveRequest.id).isValid){
-        const salt = bcrypt.genSaltSync(10);
-        console.log("SALT" + salt)
         const generatedId = solveRequest.token + solveRequest.theory + solveRequest.query;
         let requestData = {
             id: generatedId,
@@ -47,11 +46,14 @@ exports.solveNext = (req, res) => {
             .post('http://localhost:8080/solveNext', requestData)
             .then(response => {
                 console.log(response.data)
-        });
+                sockets.get(solveRequest.username).emit('solve-response', response.data)
+            });
     //}else{
       //console.log("error");
     //}
 }
+
+exports.reset = (req, res) => {}
 
 exports.signup = (req, res) => {
     res.header('Access-Control-Allow-Origin', '*');

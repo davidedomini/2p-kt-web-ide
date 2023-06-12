@@ -4,6 +4,16 @@
 <script>
 
 export default {
+    mounted(){
+        localStorage.username = "dom"
+        localStorage.id = "domID"
+        let socket = io('http://localhost:3000')
+        console.log("localStorage.getItem('username')")
+        socket.emit('connect-client', localStorage.getItem('username'))
+        socket.on('solve-response', (data) => {
+            this.result += "\n" + data
+        })
+    },
     data() {
         return {
             code: "",
@@ -15,8 +25,6 @@ export default {
     },
     methods: {
         solveNext() {
-            console.log(this.code)
-            this.result += "\n Solve Pressed"
             axios
                 .post('http://localhost:3000/api/solveNext', {
                     request: {
@@ -31,8 +39,6 @@ export default {
                 });
         },
         solveAll() {
-            console.log(this.query)
-            this.result += "\n SolveAll Pressed"
             axios
                 .post('http://localhost:3000/api/solveAll', {
                     request: {
@@ -48,6 +54,18 @@ export default {
         },
         reset() {
             this.result = "Query result:"
+            axios
+                .post('http://localhost:3000/api/reset', {
+                    request: {
+                        username: localStorage.getItem('username'),
+                        token: localStorage.getItem('token'),
+                        id: localStorage.getItem('userid'),
+                        theory: "",
+                        query: "",
+                        timeout: "",
+                        maxSol: ""
+                    }
+                });
         }
     }
 }

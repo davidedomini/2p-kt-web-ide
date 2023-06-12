@@ -19,4 +19,8 @@ module.exports = (app) => {
         .route('/api/solveNext')
         .post(jsonParser, controller.solveNext)
 
+    app.
+        route('/api/reset')
+        .post(jsonParser, controller.reset)
+
 }
