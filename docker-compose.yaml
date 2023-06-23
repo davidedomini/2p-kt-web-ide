@@ -10,6 +10,13 @@ services:
       environment: 
         - MDB_PASS=YF9DSil2Q4lmXAT2
         - MDB_NICK=davidedomini
+  
+  2pktservice:
+    container_name: 2pktservice
+    build: ./service-2pkt
+    restart: always
+    ports:
+      - '8080:8080'
 
   client:
     container_name: client

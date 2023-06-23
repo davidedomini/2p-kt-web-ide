@@ -41,5 +41,6 @@ fun Application.module() {
 
 fun main() {
     embeddedServer(Netty, port = 8080, module = Application::module).start(wait = true)
+    println("Server started at port 8080")
 }
 
