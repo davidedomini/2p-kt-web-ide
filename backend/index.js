@@ -5,12 +5,24 @@ const routes = require('./routes/routes.js')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const sockets = require('./utils/sockets').sockets
+//const config = require('./config/dbconfig.js')
+const db = require("./models/database.js")
 
 global.appRoot = path.resolve(__dirname)
 
 var PORT = 3000
 
-//mongoose.connect('mongodb://localhost:27018/2pktweb')
+console.log("Connecting to database..." + db.url)
+
+db.mongoose.connect(db.url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }).then(()=>{
+    console.log("connected to the database SUCCESSFULLY");
+  }).catch(err=>{
+    console.log("connection to the database FAILED ", err);
+    process.exit();
+  });
 
 routes(app)
 

@@ -23,4 +23,8 @@ module.exports = (app) => {
         route('/api/reset')
         .post(jsonParser, controller.reset)
 
+     app.
+        route('/api/try')
+        .post(jsonParser, controller.try)
+
 }

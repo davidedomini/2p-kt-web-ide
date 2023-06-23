@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+
+  server:
+      container_name: server
+      build: ./backend
+      restart: always
+      ports:
+        - '3000:3000'
+      environment: 
+        - MDB_PASS=YF9DSil2Q4lmXAT2
+        - MDB_NICK=davidedomini
+
+  client:
+    container_name: client
+    build: ./frontend
+    restart: always
+    ports:
+      - '5173:80'
