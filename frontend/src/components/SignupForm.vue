@@ -1,9 +1,12 @@
-<script setup></script>
+<script setup>
+import router from "@/router";
+</script>
 
 <script>
 export default {
     data() {
         return {
+            messages: [],
             form: {
                 name: '',
                 surname: '',
@@ -24,7 +27,13 @@ export default {
                         username: this.form.username,
                         password: this.form.password,
                     }
-                }).then(res => console.log(res));
+                }).then(res => {
+                    if(res.result == 'error'){
+                        this.messages.push({severity: 'error', content: res.message})
+                    }else{
+                        router.push({path: '/'})
+                    }
+                });
         }
     }
 }
@@ -36,27 +45,30 @@ export default {
         <form class="signup-form" @submit.prevent="registerStudent">
             <h1>Signup</h1>
             <div class="p-field">
-            <label for="name">Name</label>
-            <InputText id="name" v-model="form.name" />
+                <label for="name">Name</label>
+                <InputText id="name" v-model="form.name" />
             </div>
             <div class="p-field">
-            <label for="surname">Surname</label>
-            <InputText id="surname" v-model="form.surname" />
+                <label for="surname">Surname</label>
+                <InputText id="surname" v-model="form.surname" />
             </div>
             <div class="p-field">
-            <label for="email">Email</label>
-            <InputText id="email" v-model="form.email" />
+                <label for="email">Email</label>
+                <InputText id="email" v-model="form.email" />
             </div>
             <div class="p-field">
-            <label for="username">Username</label>
-            <InputText id="username" v-model="form.username" />
+                <label for="username">Username</label>
+                <InputText id="username" v-model="form.username" />
             </div>
             <div class="p-field">
-            <label for="password">Password</label>
-            <InputText type="password" id="password" v-model="form.password" />
+                <label for="password">Password</label>
+                <InputText type="password" id="password" v-model="form.password" />
             </div>
             <div class="p-field">
-            <Button type="submit" label="Signup" />
+                <Button type="submit" label="Signup" />
+            </div>
+            <div>
+                <Message v-for="msg of messages" :severity="msg.severity">{{msg.content}}</Message>
             </div>
         </form>
     </div>  
