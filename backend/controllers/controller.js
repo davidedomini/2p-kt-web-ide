@@ -122,12 +122,12 @@ exports.signin = (req, res) => {
         if(usr != null) {
             if(bcrypt.compareSync(user.password, usr.password)){
                 let tkn = jsonwebtoken.sign({ username: usr.username, id: usr._id }, SECRET_KEY, { algorithm: 'HS512', expiresIn: '7d' });
-                res.json({ result: 'ok', token: tkn, username: usr.username, id: usr._id });
+                res.json({ result: 'success', token: tkn, username: usr.username, id: usr._id });
             } else{
-                return res.json({ result: 'Error! Wrong password'}); 
+                return res.json({ result: 'error', message: 'Wrong password'}); 
             }
         } else {
-            return res.json({ result: 'Error! User not found'}); 
+            return res.json({ result: 'error', message: 'User not found'}); 
         }
     }).catch(err => {
         return res.send({status: 500, error: err});

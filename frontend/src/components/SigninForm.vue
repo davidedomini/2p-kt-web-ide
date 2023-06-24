@@ -27,8 +27,8 @@ export default {
                     }
                 }).then(res => {
                     let response = res.data
-                    if(response.result.includes('Error')){
-                        this.messages.push({severity: 'error', content: 'Login error! Please retry'})
+                    if(response.result === 'error'){
+                        this.messages.push({severity: 'error', content: response.message})
                     } else {
                         localStorage.username = response.username
                         localStorage.userid = response.id
