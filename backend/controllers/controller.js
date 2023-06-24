@@ -19,7 +19,7 @@ exports.solveAll = (req, res) => {
             type: "ALL"
         }
         axios
-            .post('http://localhost:8080/solveAll', requestData)
+            .post('http://2pktservice:8080/solveAll', requestData)
             .then(response => {
                 console.log("[BACKEND] Solve all done")
                 sockets.get(solveRequest.username).emit('solve-response', response.data)
@@ -57,7 +57,7 @@ exports.solveNext = (req, res) => {
             type: "NEXT"
         }
         axios
-            .post('http://localhost:8080/solveNext', requestData)
+            .post('http://2pktservice:8080/solveNext', requestData)
             .then(response => {
                 console.log("[BACKEND] Solve next done")
                 sockets.get(solveRequest.username).emit('solve-response', response.data)
@@ -81,7 +81,7 @@ exports.reset = (req, res) => {
             type: "RESET"
         }
         axios
-            .post('http://localhost:8080/reset', requestData)
+            .post('http://2pktservice:8080/reset', requestData)
             .then(response => {
                 console.log("[BACKEND] Reset done")
             });
