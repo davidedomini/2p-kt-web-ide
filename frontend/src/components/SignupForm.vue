@@ -28,8 +28,9 @@ export default {
                         password: this.form.password,
                     }
                 }).then(res => {
-                    if(res.result == 'error'){
-                        this.messages.push({severity: 'error', content: res.message})
+                    console.log(res)
+                    if(res.data.result === 'error'){
+                        this.messages.push({severity: 'error', content: res.data.message})
                     }else{
                         router.push({path: '/'})
                     }
