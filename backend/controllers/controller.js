@@ -22,9 +22,10 @@ exports.solveAll = (req, res) => {
             .post('http://2pktservice:8080/solveAll', requestData)
             .then(response => {
                 console.log("[BACKEND] Solve all done")
-                sockets.get(solveRequest.username).emit('solve-response', response.data)
+                sockets
+                    .get(solveRequest.username)
+                    .emit('solve-response', response.data)
             });
-        
     //}else{
     //    console.log("error");
     //}    
