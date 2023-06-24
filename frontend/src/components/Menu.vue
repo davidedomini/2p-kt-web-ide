@@ -11,6 +11,8 @@ export default {
                     icon:'pi pi-fw pi-sign-out',
                     command: () => {
                         localStorage.removeItem('token');
+                        localStorage.removeItem('username');
+                        localStorage.removeItem('id');
                         router.push({path: '/login'});
                     }
                 }
