@@ -101,34 +101,15 @@ exports.signup = (req, res) => {
             user.password = hash;
             var newUser = new User(user);
             newUser.save((err, usr) => {
-                if(err) res.json({ message: 'Error! Retry later' });
-                else res.json({ message: 'OK! User registerd!' });
+                if(err) res.json({ result: 'error', message: 'Retry later' });
+                else res.json({ result: 'success', message: 'User registerd' });
             });
         } else {
-            return res.json({ message: 'Error! User already registered' });
+            return res.json({ result: 'error', message: 'User already registered' });
         }
     }).catch(err => {
         return res.send({status: 500, error: err});
     });
-
-    /*User
-        .findOne()
-        .where('username').equals(user.username)
-        .exec((err, student) => {
-            if(student == null){
-                const salt = bcrypt.genSaltSync(10);
-                const hash = bcrypt.hashSync(user.password, salt);
-                user.salt = salt;
-                user.password = hash;
-                var newUser = new User(user);
-                newUser.save((err, usr) => {
-                    if(err) res.json({ message: 'Error! Retry later' });
-                    else res.json({ message: 'OK! User registerd!' });
-                });
-            } else{
-                res.json({ message: 'Error! User already registered' });
-            }
-        });*/
 }
 
 exports.signin = (req, res) => {
@@ -151,19 +132,6 @@ exports.signin = (req, res) => {
     }).catch(err => {
         return res.send({status: 500, error: err});
     });
-    /*User
-        .findOne()
-        .where('username').equals(user.username)
-        .exec((err, usr) => {
-            if(usr != null && !err){
-                if(bcrypt.compareSync(user.password, usr.password)){
-                    let tkn = jsonwebtoken.sign({ username: usr.username, id: usr._id }, SECRET_KEY, { algorithm: 'HS512', expiresIn: '7d' });
-                    res.json({ result: 'ok', token: tkn, username: usr.username, id: usr._id });
-                } else{
-                    res.json({ result: 'Error! wrong password'}); 
-                }
-            }
-        });*/
 }
 
 const authorization = (token, id) => {
