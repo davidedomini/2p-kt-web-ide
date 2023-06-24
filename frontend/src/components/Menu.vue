@@ -1,4 +1,5 @@
 <script setup>
+import router from "@/router";
 </script>
 
 <script>
@@ -13,7 +14,7 @@ export default {
                         localStorage.removeItem('token');
                         localStorage.removeItem('username');
                         localStorage.removeItem('id');
-                        router.push({path: '/login'});
+                        router.push({path: '/'});
                     }
                 }
             ]
