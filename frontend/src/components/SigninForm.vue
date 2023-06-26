@@ -5,6 +5,11 @@ import axios from 'axios'
 
 <script>
 export default {
+    mounted(){
+        if(localStorage.token){
+            router.push({path: '/code'})
+        }
+    },
     data() {
         return {
             messages: [],
