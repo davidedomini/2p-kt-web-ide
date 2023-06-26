@@ -11,7 +11,6 @@ exports.solveAll = (req, res) => {
     res.header('Access-Control-Allow-Origin', '*');
     let solveRequest = req.body.request;
     if(authorization(solveRequest.token, solveRequest.id).isValid){
-        console.log("[BACKEND] valid request")
         let requestData = {
             id: -1,
             theory: solveRequest.theory,
@@ -119,8 +118,6 @@ exports.signup = (req, res) => {
 exports.signin = (req, res) => {
     res.header('Access-Control-Allow-Origin', '*');
     let user = req.body.user;
-    console.log(`Username: ${user.username}`);
-    console.log(`Password: ${user.password}`);
 
     User.findOne({username: user.username}).then( usr => {
         if(usr != null) {

@@ -23,7 +23,6 @@ export default {
     },
     methods: {
         solveNext() {
-            console.log("[SolveNext] sending request")
             axios
                 .post('http://server:3000/api/solveNext', {
                     request: {
@@ -35,13 +34,9 @@ export default {
                         timeout: this.timeout,
                         maxSol: this.maxSol
                     }
-                }).then(res => {
-                    console.log(res);
                 });
-            console.log("[SolveNext] request sent")
         },
         solveAll() {
-            console.log("[SolveAll] sending request")
             axios
                 .post('http://server:3000/api/solveAll', {
                     request: {
@@ -53,13 +48,9 @@ export default {
                         timeout: this.timeout,
                         maxSol: this.maxSol
                     }
-                }).then(res => {
-                    console.log(res);
                 });
-            console.log("[SolveAll] request sent")
         },
         reset() {
-            console.log("[Reset] sending request")
             this.result = "Query result:"
             axios
                 .post('http://server:3000/api/reset', {
@@ -72,28 +63,7 @@ export default {
                         timeout: "",
                         maxSol: ""
                     }
-                }).then(res => {
-                    console.log(res);
                 });
-            console.log("[Reset] request sent")
-        },
-        tryReq(){
-            console.log("[Try] sending request")
-            axios
-                .post('http://server:3000/api/try', {
-                    request: {
-                        username: localStorage.getItem('username'),
-                        token: localStorage.getItem('token'),
-                        id: localStorage.getItem('userid'),
-                        theory: "",
-                        query: "",
-                        timeout: "",
-                        maxSol: ""
-                    }
-                }).then(res => {
-                    console.log(res);
-                });
-            console.log("[Try] request sent")
         }
     }
 }

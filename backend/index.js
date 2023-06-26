@@ -5,7 +5,6 @@ const routes = require('./routes/routes.js')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const sockets = require('./utils/sockets').sockets
-//const config = require('./config/dbconfig.js')
 const db = require("./models/database.js")
 
 global.appRoot = path.resolve(__dirname)

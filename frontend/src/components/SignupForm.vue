@@ -18,9 +18,9 @@ export default {
         }
     },
     methods:{
-        registerStudent(){
+        registerUser(){
             axios
-                .post('http://localhost:3000/api/signup', {
+                .post('http://server:3000/api/signup', {
                     user: {
                         name: this.form.name,
                         surname: this.form.surname,
@@ -44,7 +44,7 @@ export default {
 
 <template>
     <div class="container">
-        <form class="signup-form" @submit.prevent="registerStudent">
+        <form class="signup-form" @submit.prevent="registerUser">
             <h1>Signup</h1>
             <div class="p-field">
                 <label for="name">Name</label>
