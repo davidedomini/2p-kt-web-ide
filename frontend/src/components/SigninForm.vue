@@ -1,5 +1,6 @@
 <script setup>
 import router from "@/router";
+import axios from 'axios'
 </script>
 
 <script>
@@ -20,7 +21,7 @@ export default {
         login(){
             this.messages = []
             axios
-                .post('http://localhost:3000/api/signin', {
+                .post('http://server:3000/api/signin', {
                     user: {
                         username: this.form.username,
                         password: this.form.password,

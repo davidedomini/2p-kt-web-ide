@@ -13,27 +13,38 @@
 #CMD node index.js
 
 
-FROM node:18
+#FROM node:18
 
 # Create app directory
-WORKDIR $HOME/backend
+#WORKDIR $HOME/backend
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
-COPY package*.json ./
+#COPY package*.json ./
 
 #Clean cache
-RUN rm -rf node_modules
-RUN npm cache clean --force
+#RUN rm -rf node_modules
+#RUN npm cache clean --force
 
-RUN npm install
-RUN npm install bcrypt
+#RUN npm install
+#RUN npm install bcrypt
 # If you are building your code for production
 # RUN npm ci --omit=dev
 
 # Bundle app source
-COPY . .
+#COPY . .
 
-EXPOSE 3000
-CMD [ "node", "index.js" ]
+#EXPOSE 3000
+#CMD [ "node", "index.js" ]
+
+#Creating container image
+FROM node:18-alpine
+
+COPY . ${HOME}/backend
+
+WORKDIR $HOME/backend/
+RUN npm install
+
+#Container Execution
+CMD node index.js

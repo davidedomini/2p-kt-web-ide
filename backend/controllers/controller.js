@@ -7,6 +7,7 @@ const db = require("../models/database.js")
 const User = db.users;
 
 exports.solveAll = (req, res) => {
+    console.log("[BACKEND] doing solve all")
     res.header('Access-Control-Allow-Origin', '*');
     let solveRequest = req.body.request;
     //if(authorization(solveRequest.token, solveRequest.id).isValid){
@@ -15,9 +16,11 @@ exports.solveAll = (req, res) => {
             theory: solveRequest.theory,
             goal: solveRequest.query,
             timeout: solveRequest.timeout,
-            maxSol: solveRequest.maxSol,
-            type: "ALL"
+            maxSol: solveRequest.maxSol
         }
+
+        res.send({status: 200, message: "request accepted" })
+
         axios
             .post('http://2pktservice:8080/solveAll', requestData)
             .then(response => {
@@ -45,6 +48,7 @@ exports.try = (req, res) => {
 }
 
 exports.solveNext = (req, res) => {
+    console.log("[BACKEND] doing solve next")
     res.header('Access-Control-Allow-Origin', '*');
     let solveRequest = req.body.request;
     //if(authorization(solveRequest.token, solveRequest.id).isValid){
@@ -54,14 +58,18 @@ exports.solveNext = (req, res) => {
             theory: solveRequest.theory,
             goal: solveRequest.query,
             timeout: solveRequest.timeout,
-            maxSol: solveRequest.maxSol,
-            type: "NEXT"
+            maxSol: solveRequest.maxSol
         }
+
+        res.send({status: 200, message: "request accepted" })
+
         axios
             .post('http://2pktservice:8080/solveNext', requestData)
             .then(response => {
                 console.log("[BACKEND] Solve next done")
-                sockets.get(solveRequest.username).emit('solve-response', response.data)
+                sockets
+                    .get(solveRequest.username)
+                    .emit('solve-response', response.data)
             });
     //}else{
       //console.log("error");
@@ -69,18 +77,22 @@ exports.solveNext = (req, res) => {
 }
 
 exports.reset = (req, res) => {
+    console.log("[BACKEND] doing reset")
     res.header('Access-Control-Allow-Origin', '*');
     let solveRequest = req.body.request;
+    console.log("[BACKEND] reset" + solveRequest)
     //if(authorization(solveRequest.token, solveRequest.id).isValid){
         const generatedId = solveRequest.token;
         let requestData = {
             id: generatedId,
-            theory: solveRequest.theory,
-            goal: solveRequest.query,
-            timeout: solveRequest.timeout,
-            maxSol: solveRequest.maxSol,
-            type: "RESET"
+            theory: "empty",
+            goal: "empty",
+            timeout: 0,
+            maxSol: 0
         }
+
+        res.send({status: 200, message: "request accepted" })
+
         axios
             .post('http://2pktservice:8080/reset', requestData)
             .then(response => {

@@ -14,6 +14,7 @@ class Controller{
     private val computations = ComputationsCollection()
 
     fun solveAll(request: ComputationRequest):String {
+        log("Entering solveAll")
         val p = getSolverAndGoal(request)
         val solutions =
             p.first
@@ -22,11 +23,14 @@ class Controller{
                 .map { it.substitution }
                 .map { it.toString()}
                 .reduce { acc, string -> acc + string }
+        log("Solutions: $solutions")
         return solutions
     }
 
     fun solveNext(request: ComputationRequest): String{
+        log("Entering solveNext")
         if(!computations.isPresent(request.id)) {
+            log("Computation not already present")
             val p = getSolverAndGoal(request)
             val iterator =
                 p.first
@@ -35,10 +39,13 @@ class Controller{
                     .iterator()
             computations.addComputation(request.id, iterator)
         }
+        log("Finding next solution")
         val solution = computations
             .nextSolution(request.id)
+        log("Solution: $solution")
         return when(solution){
             null -> {
+                log("No more solutions...remvoing computation")
                 computations.removeComputation(request.id)
                 "No more solutions!"
             }
@@ -59,6 +66,10 @@ class Controller{
         }
         val solver = ClassicSolverFactory.solverOf(staticKb = theory)
         return Pair(solver, goal)
+    }
+
+    private fun log(message: String) {
+        println("[Controller] $message")
     }
 
 }

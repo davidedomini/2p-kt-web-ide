@@ -8,10 +8,12 @@ class ComputationsCollection {
 
     fun addComputation(id: String, c: Iterator<Solution>) {
         computations = computations + mapOf(id to c)
+        log("Added computation: ${computations.toString()}")
     }
 
     fun removeComputation(id: String) {
         computations = computations.filterNot { it.key.contains(id, ignoreCase = true) }
+        log("Removed computation: ${computations.toString()}")
     }
 
     fun nextSolution(id: String): Solution? {
@@ -24,6 +26,10 @@ class ComputationsCollection {
 
     fun isPresent(id: String): Boolean {
         return computations.containsKey(id)
+    }
+
+    private fun log(message: String) {
+        println("[ComputationCollection] $message")
     }
 
 }

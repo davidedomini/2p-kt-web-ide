@@ -1,11 +1,12 @@
 <script setup>
+import axios from 'axios'
 </script>
 
 <script>
 
 export default {
     mounted(){
-        let socket = io('http://localhost:3000')
+        let socket = io('http://server:3000')
         socket.emit('connect-client', localStorage.getItem('username'))
         socket.on('solve-response', (data) => {
             this.result += "\n" + data
@@ -22,8 +23,9 @@ export default {
     },
     methods: {
         solveNext() {
+            console.log("[SolveNext] sending request")
             axios
-                .post('http://localhost:3000/api/solveNext', {
+                .post('http://server:3000/api/solveNext', {
                     request: {
                         username: localStorage.getItem('username'),
                         token: localStorage.getItem('token'),
@@ -33,11 +35,15 @@ export default {
                         timeout: this.timeout,
                         maxSol: this.maxSol
                     }
+                }).then(res => {
+                    console.log(res);
                 });
+            console.log("[SolveNext] request sent")
         },
         solveAll() {
+            console.log("[SolveAll] sending request")
             axios
-                .post('http://localhost:3000/api/solveAll', {
+                .post('http://server:3000/api/solveAll', {
                     request: {
                         username: localStorage.getItem('username'),
                         token: localStorage.getItem('token'),
@@ -47,12 +53,16 @@ export default {
                         timeout: this.timeout,
                         maxSol: this.maxSol
                     }
+                }).then(res => {
+                    console.log(res);
                 });
+            console.log("[SolveAll] request sent")
         },
         reset() {
+            console.log("[Reset] sending request")
             this.result = "Query result:"
             axios
-                .post('http://localhost:3000/api/reset', {
+                .post('http://server:3000/api/reset', {
                     request: {
                         username: localStorage.getItem('username'),
                         token: localStorage.getItem('token'),
@@ -62,7 +72,28 @@ export default {
                         timeout: "",
                         maxSol: ""
                     }
+                }).then(res => {
+                    console.log(res);
                 });
+            console.log("[Reset] request sent")
+        },
+        tryReq(){
+            console.log("[Try] sending request")
+            axios
+                .post('http://server:3000/api/try', {
+                    request: {
+                        username: localStorage.getItem('username'),
+                        token: localStorage.getItem('token'),
+                        id: localStorage.getItem('userid'),
+                        theory: "",
+                        query: "",
+                        timeout: "",
+                        maxSol: ""
+                    }
+                }).then(res => {
+                    console.log(res);
+                });
+            console.log("[Try] request sent")
         }
     }
 }
@@ -77,11 +108,11 @@ export default {
 
     <div class="slider-container">
         <div>
-            <label for="timeout" id="timeout">Timeout (ms): {{timeout}} </label>
+            <label for="timeout" id="timeoutLab">Timeout (ms): {{timeout}} </label>
             <input id="timeout" type="range" min="1" max="100" v-model="timeout">
         </div>
         <div>
-            <label for="maxSol" id="timeout">Max solutions: {{maxSol}} </label>
+            <label for="maxSol" id="maxSolLab">Max solutions: {{maxSol}} </label>
             <input id="maxSol" type="range" min="1" max="100" v-model="maxSol">
         </div>
     </div>

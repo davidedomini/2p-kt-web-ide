@@ -1,5 +1,6 @@
 <script setup>
 import router from "@/router";
+import axios from 'axios'
 </script>
 
 <script>

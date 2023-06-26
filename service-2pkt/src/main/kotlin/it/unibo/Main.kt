@@ -15,6 +15,7 @@ import it.unibo.request.ComputationRequest
 val controller = Controller()
 
 fun Application.module() {
+
     install(CORS) {
         allowMethod(HttpMethod.Options)
         allowMethod(HttpMethod.Post)
@@ -23,6 +24,7 @@ fun Application.module() {
         allowHeader(HttpHeaders.ContentType)
         anyHost()
     }
+
     routing {
         post("/solveAll") {
             val request = call.receiveText()
@@ -43,10 +45,6 @@ fun Application.module() {
             val computationRequest = Gson().fromJson(request, ComputationRequest::class.java)
             controller.reset(computationRequest)
             call.respondText("Reset done!", ContentType.Text.Plain)
-        }
-
-        post("/check") {
-            call.respondText("Server working!", ContentType.Text.Plain)
         }
     }
 }
