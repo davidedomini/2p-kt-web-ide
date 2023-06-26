@@ -36,19 +36,6 @@ exports.solveAll = (req, res) => {
     }    
 }
 
-exports.try = (req, res) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    User.findOne({username: "dom99"}).then( user => {
-        if(!user){
-            return res.send({status: 400, message: "Bad request"});
-        }else{
-            return res.send({status: 200, user: user})
-        }
-        }).catch(err=> {
-        return res.send({status: 500, error: err});
-        });
-}
-
 exports.solveNext = (req, res) => {
     console.log("[BACKEND] doing solve next")
     res.header('Access-Control-Allow-Origin', '*');
