@@ -10,7 +10,8 @@ exports.solveAll = (req, res) => {
     console.log("[BACKEND] doing solve all")
     res.header('Access-Control-Allow-Origin', '*');
     let solveRequest = req.body.request;
-    //if(authorization(solveRequest.token, solveRequest.id).isValid){
+    if(authorization(solveRequest.token, solveRequest.id).isValid){
+        console.log("[BACKEND] valid request")
         let requestData = {
             id: -1,
             theory: solveRequest.theory,
@@ -19,7 +20,7 @@ exports.solveAll = (req, res) => {
             maxSol: solveRequest.maxSol
         }
 
-        res.send({status: 200, message: "request accepted" })
+        res.send({ status: 200, message: "request accepted" })
 
         axios
             .post('http://2pktservice:8080/solveAll', requestData)
@@ -29,9 +30,10 @@ exports.solveAll = (req, res) => {
                     .get(solveRequest.username)
                     .emit('solve-response', response.data)
             });
-    //}else{
-    //    console.log("error");
-    //}    
+    } else {
+        res.send({ status: 403, message: "request denied, user not authorized" })
+        console.log("[BACKEND] request denied, user not authorized");
+    }    
 }
 
 exports.try = (req, res) => {
@@ -51,7 +53,7 @@ exports.solveNext = (req, res) => {
     console.log("[BACKEND] doing solve next")
     res.header('Access-Control-Allow-Origin', '*');
     let solveRequest = req.body.request;
-    //if(authorization(solveRequest.token, solveRequest.id).isValid){
+    if(authorization(solveRequest.token, solveRequest.id).isValid){
         const generatedId = solveRequest.token + solveRequest.theory + solveRequest.query;
         let requestData = {
             id: generatedId,
@@ -61,7 +63,7 @@ exports.solveNext = (req, res) => {
             maxSol: solveRequest.maxSol
         }
 
-        res.send({status: 200, message: "request accepted" })
+        res.send({ status: 200, message: "request accepted" })
 
         axios
             .post('http://2pktservice:8080/solveNext', requestData)
@@ -71,9 +73,10 @@ exports.solveNext = (req, res) => {
                     .get(solveRequest.username)
                     .emit('solve-response', response.data)
             });
-    //}else{
-      //console.log("error");
-    //}
+    } else {
+        res.send({ status: 403, message: "request denied, user not authorized" })
+        console.log("[BACKEND] request denied, user not authorized");
+    }
 }
 
 exports.reset = (req, res) => {
@@ -81,7 +84,7 @@ exports.reset = (req, res) => {
     res.header('Access-Control-Allow-Origin', '*');
     let solveRequest = req.body.request;
     console.log("[BACKEND] reset" + solveRequest)
-    //if(authorization(solveRequest.token, solveRequest.id).isValid){
+    if(authorization(solveRequest.token, solveRequest.id).isValid){
         const generatedId = solveRequest.token;
         let requestData = {
             id: generatedId,
@@ -91,16 +94,17 @@ exports.reset = (req, res) => {
             maxSol: 0
         }
 
-        res.send({status: 200, message: "request accepted" })
+        res.send({ status: 200, message: "request accepted" })
 
         axios
             .post('http://2pktservice:8080/reset', requestData)
             .then(response => {
                 console.log("[BACKEND] Reset done")
             });
-    //}else{
-      //console.log("error");
-    //}
+    } else {
+        res.send({ status: 403, message: "request denied, user not authorized" })
+        console.log("[BACKEND] request denied, user not authorized");
+    }
 }
 
 exports.signup = (req, res) => {
